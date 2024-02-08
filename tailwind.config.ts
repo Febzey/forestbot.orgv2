@@ -13,6 +13,13 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: { 
+        sans: ["Inter", "sans-serif"],
+        serif: ["Merriweather", "serif"],
+        //font-family: 'Protest Strike', sans-serif;
+        Protest: "'Protest Strike', sans-serif",
+
+      },
     },
   },
   plugins: [],
