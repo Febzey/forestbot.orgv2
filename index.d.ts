@@ -21,3 +21,21 @@ type PlayerData = {
     };
     MCServer: string;
   };
+
+
+  interface PlayerActivityData {
+    UUID: string;
+    Date: number;
+    mc_server: string;
+    type: string;
+}
+
+interface PlaytimeSession {
+    loginTime: number;
+    logoutTime: number;
+    playtime: number;
+}
+
+interface PlaytimeGraphProps {
+    playtimeSessions: PlaytimeSession[];
+}

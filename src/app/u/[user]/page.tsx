@@ -31,7 +31,7 @@ export default async function Page({
 
 
 async function UserPageBuilder({ username, server }: { username: string, server?: string }) {
-  let data: PlayerData[]|undefined = await getUser(username)
+  let data: PlayerData[] | undefined = await getUser(username)
   if (!data) return notFound()
 
   const servers: string[] = [];
@@ -42,8 +42,6 @@ async function UserPageBuilder({ username, server }: { username: string, server?
     }
   })
 
-  console.log(servers)
-
   const serverPlayerData = () => {
     if (!data) return notFound();
     if (server) {
@@ -51,19 +49,12 @@ async function UserPageBuilder({ username, server }: { username: string, server?
       if (!stat) return notFound();
       return stat;
     } else {
-      let highestPlayTimeServerStats = data.sort((a, b) => b.Playtime - a.Playtime)[0]; 
+      let highestPlayTimeServerStats = data.sort((a, b) => b.Playtime - a.Playtime)[0];
       return highestPlayTimeServerStats;
     }
   }
-  //await new Promise((resolve) => setTimeout(resolve, 10000))
-  //we basically need to loop through data and put all of our servers into an array.
-  //we want the user to pick a server for the user to view their stats on.
-  //if only one server exists, we want to skip the selection part and show them their stats for that one server right away
 
   return (
-    <>
-        <UserProfileCard userData={serverPlayerData()} availableServers={servers} />
-
-    </>
-    )
+    <UserProfileCard userData={serverPlayerData()} availableServers={servers} />
+  )
 }

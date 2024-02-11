@@ -6,3 +6,37 @@
 
 
 html{scroll-behavior: smooth;}
+
+
+/* Apply these styles to the entire document */
+html, body, * {
+    scrollbar-width: thin; /* Firefox scrollbar width */
+    scrollbar-color: #27272a #3f3f46; /* Firefox scrollbar colors */
+  }
+  
+  /* Webkit browsers (Chrome, Safari) */
+  *::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+  
+  /* Handle on hover */
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #3f3f46; /* Color on hover */
+  }
+  
+  /* Handle */
+  *::-webkit-scrollbar-thumb {
+    background-color: #27272a; /* Color of the scrollbar handle */
+    border-radius: 6px; /* Rounded corners */
+  }
+  
+  /* Track */
+  *::-webkit-scrollbar-track {
+    background-color: #27272a; /* Color of the scrollbar track */
+  }
+  
+  /* Handle when it's grabbing (clicked and being dragged) */
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #3f3f46; /* Color when the scrollbar is being dragged */
+  }
+  
