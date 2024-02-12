@@ -7,8 +7,12 @@ export default async function MessageHistoryCard({ username, server }: { usernam
     const messages = await api.getMessages(username, server, 100, "DESC");
     if (!messages || messages.length === 0) {
         return (
-            <div className="">
-                Messages could not be loaded.
+            <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
+                <h3 className="font-Protest text-3xl">Message History</h3>
+                <div className="bg-zinc-800 font-Protest items-center justify-center overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
+                    <p className="text-3xl text-zinc-100">No Messages Found!</p>
+                    <p className="text-lg text-zinc-300">Go chat loser!</p>
+                </div>
             </div>
 
         )

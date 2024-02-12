@@ -27,7 +27,7 @@ type PlayerData = {
     UUID: string;
     Date: number;
     mc_server: string;
-    type: string;
+    Type: string;
 }
 
 interface PlaytimeSession {

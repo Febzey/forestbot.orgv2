@@ -7,14 +7,15 @@ export default async function AdvancementHistoryCard({ uuid, server }: { uuid: s
     const advancements = await api.getAdvancements(uuid, server, 100, "DESC");
     if (!advancements || advancements.length === 0) {
         return (
-            <div className="">
-                No Advancement History Found.
+            <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
+                <h3 className="font-Protest text-3xl">Advancement History</h3>
+                <div className="bg-zinc-800 font-Protest items-center justify-center overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
+                    <p className="text-3xl text-zinc-100">No Advancements Found!</p>
+                    <p className="text-lg text-zinc-300">GO DO SOMETHING!</p>
+                </div>
             </div>
         )
     }
-
-
-    console.log(advancements);
 
     return (
         <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">

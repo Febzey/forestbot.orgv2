@@ -4,16 +4,43 @@ import ServerSelectDropDown from "./components/serverSelectDropDown";
 import { Suspense } from "react";
 import { GeneralStatsSection } from "./components/general_stats_card";
 import { GraphLoadingSkeleton } from "./loading";
-import { api } from "../../../../apiGetter";
-import moment from "moment";
 import MessageHistoryCard from "./components/playerHistory/messages_history";
 import AdvancementHistoryCard from "./components/playerHistory/advancement_history";
+import PlayerDeathHistory from "./components/playerHistory/death_history";
+import PlayerKillHistory from "./components/playerHistory/kill_history";
+import { api } from "../../../../apiGetter";
 
+import { FaCircleDot } from "react-icons/fa6"
+import moment from "moment";
 //TODO: 
 //Times user has been seen in past week,
 //average playtime per day,
 //general activity (what does this mean?)
 //stats as in retention, average day played, average time played: example: most active around 7pm on weekdays; 2pm on weekends type thing.
+
+async function OnlineStatus({ username, lastseen }: { username: string, lastseen: number }) {
+
+    const onlineCheck = await api.getOnlineCheck(username);
+    console.log(onlineCheck)
+    return (
+        <div className="mx-auto pt-5 flex text-sm font-Protest text-zinc-200 flex-row gap-2 items-center justify-center">
+            {
+                onlineCheck.online === "true"
+                    ?
+                    <>
+                        <FaCircleDot className="text-green-400" />
+                        <p>{onlineCheck.server}</p>
+                        <p>For {moment(lastseen).format('MMM, Do, YYYY')}</p>
+                    </>
+                    :
+                    <>
+                        <FaCircleDot className="text-red-400" />
+                        <p>offline</p>
+                    </>
+            }
+        </div>
+    )
+}
 
 export default function UserProfileCard({ userData, availableServers }: { userData: PlayerData, availableServers: string[] }) {
     return (
@@ -26,11 +53,15 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
             }
             <div className="gap-1 flex items-center flex-col  relative mb-auto mt-[6%] ">
                 <Image className="bg-zinc-800 p-4 mb-5 rounded-full" alt="MinecraftRender" width={100} height={100} src={`https://skins.danielraybone.com/v1/render/head/${userData.Username}`} />
+
                 <h1 className="font-Protest text-6xl">{userData.Username}</h1>
                 <ServerSelectDropDown servers={availableServers} currentServer={userData.MCServer} username={userData.Username} />
+                <OnlineStatus username={userData.Username} lastseen={parseInt(userData.LastSeen.String)} />
+
             </div>
 
             <div className="w-full  p-8 flex flex-col items-center justify-center">
+
                 <div className="flex w-full mt-[3%] mb-auto m-4 shadow-xl shadow-zinc-900  rounded">
 
                     {
@@ -54,6 +85,7 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
                             {/* <GenerateGraphServerSide username={userData.Username} server={userData.MCServer} /> */}
                         </div>
                     </Suspense>
+
                 </div>
 
                 {
@@ -62,11 +94,7 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
                      */
                 }
                 <div className="w-full flex h-auto min-h-[100vh] m-4 bg-zinc-700 rounded p-4 shadow-2xl">
-                    {/* <h1 className="text-2xl font-Protest">Messages, Advancements, Kills and Deaths</h1>
-                    <p className="text-pretty">Coming soon...</p> */}
-
                     <PlayerHistory uuid={userData.UUID.String} username={userData.Username} server={userData.MCServer} />
-
                 </div>
 
 
@@ -77,26 +105,6 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
 }
 
 
-// async function getMessages(username: string, server: string) {
-
-//     return [];
-// }
-
-// async function getAdvancements(uuid: string, server: string) { 
-
-//     return;
-// }
-
-// async function getKills(uuid: string, server: string) { 
-
-//     return;
-// }
-
-// async function getDeaths(uuid: string, server: string) {
-
-//     return;
-// }
-
 function PlayerHistory({ uuid, username, server }: { uuid: string, username: string, server: string }) {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -105,40 +113,17 @@ function PlayerHistory({ uuid, username, server }: { uuid: string, username: str
             </Suspense>
 
             <Suspense fallback={<p>Loading Advancement History...</p>}>
-                <AdvancementHistoryCard uuid={uuid} server={server}/>
+                <AdvancementHistoryCard uuid={uuid} server={server} />
+            </Suspense>
+
+
+            <Suspense fallback={<p>Loading Death history.</p>}>
+                <PlayerDeathHistory uuid={uuid} server={server} />
+            </Suspense>
+
+            <Suspense fallback={<p>Loading Kills.</p>}>
+                <PlayerKillHistory uuid={uuid} server={server} />
             </Suspense>
         </div>
     )
 }
-
-// export async function PlayerMessagesCard({ username, server }: { username: string, server: string }) {
-
-//     const messages = await api.getMessages(username, server, 100, "DESC");
-//     if (!messages || messages.length === 0) {
-//         return (
-//             <div className="">
-//                 Messages could not be loaded.
-//             </div>
-
-//         )
-//     }
-
-//     return (
-//         <div className="flex flex-col overflow-hidden gap-3">
-//             <h3 className="font-Protest text-3xl">Message History (100)</h3>
-//             <ul className="bg-zinc-800 overflow-y-scroll p-4 flex gap-2 flex-col rounded">
-//                 {
-//                     messages.map((message, index) => {
-//                         return (
-//                             <li key={index} className="flex flex-row justify-between items-center bg-zinc-700/60 p-2 rounded">
-//                                 <span className="max-w-[70%]">{message.message}</span>
-
-//                                 <span className="italic text-zinc-300 text-xs">... {moment(parseInt(message.Date.String)).format("MMM, Do, YYYY HH:mm")}</span>
-//                             </li>
-//                         )
-//                     })
-//                 }
-//             </ul>
-//         </div>
-//     )
-// }
