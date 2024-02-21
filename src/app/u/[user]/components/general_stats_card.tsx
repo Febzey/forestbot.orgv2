@@ -7,7 +7,7 @@ async function QuoteBlock({ username, server }: { username: string, server: stri
     const quoteData = await api.getQuote(username, server);
 
     const formattedQuote = async () => {
-        if (!quoteData || !quoteData.message) return "N/A";
+        if (!quoteData || !quoteData.message || !quoteData.Date?.String) return "N/A";
         return `${quoteData.message} - ${moment(parseInt(quoteData.Date.String)).format('MMM, Do, YYYY')}, ${moment(parseInt(quoteData.Date.String)).fromNow()}`;
     }
 
@@ -50,7 +50,6 @@ async function LastAdvancementBlock({ username, server }: { username: string, se
 async function LastKillBlock({ username, server }: { username: string, server: string }) {
     const uuid = await api.convertUsernameToUuid(username);
     const lastKillData = await api.getKills(uuid as string, server, 1, "DESC");
-
     const formattedLastKill = () => {
         if (!lastKillData || lastKillData.length === 0) return "N/A";
         return `${lastKillData[0].death_message} - ${moment(parseInt(lastKillData[0].time)).format('MMM, Do, YYYY')}, ${moment(parseInt(lastKillData[0].time)).fromNow()}`;

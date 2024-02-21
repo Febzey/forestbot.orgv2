@@ -18,31 +18,41 @@ import moment from "moment";
 //general activity (what does this mean?)
 //stats as in retention, average day played, average time played: example: most active around 7pm on weekdays; 2pm on weekends type thing.
 
-async function OnlineStatus({ username, lastseen }: { username: string, lastseen: number }) {
+async function OnlineStatus({ username, availableServers }: { username: string, availableServers: PlayerData[] }) {
 
     const onlineCheck = await api.getOnlineCheck(username);
     console.log(onlineCheck)
+
+    let lastseen;
+
+    if (onlineCheck?.server) {
+        let str = availableServers.find(user => user.MCServer === onlineCheck.server)?.LastSeen.String;
+        lastseen = str ? moment(parseInt(str)).fromNow() : "N/A";
+    }
+
     return (
         <div className="mx-auto pt-5 flex text-sm font-Protest text-zinc-200 flex-row gap-2 items-center justify-center">
             {
                 onlineCheck.online === "true"
                     ?
-                    <>
-                        <FaCircleDot className="text-green-400" />
-                        <p>{onlineCheck.server}</p>
-                        <p>For {moment(lastseen).format('MMM, Do, YYYY')}</p>
-                    </>
+                    <div className="flex flex-col gap-2">
+                        <div className="flex flex-row gap-1 items-center justify-center">
+                            <FaCircleDot className="text-green-400" />
+                            <p>{onlineCheck.server}</p>
+                        </div>
+                        <p>{lastseen}</p>
+                    </div>
                     :
                     <>
                         <FaCircleDot className="text-red-400" />
-                        <p>offline</p>
+                        <p>OFFLINE</p>
                     </>
             }
         </div>
     )
 }
 
-export default function UserProfileCard({ userData, availableServers }: { userData: PlayerData, availableServers: string[] }) {
+export default function UserProfileCard({ userData, availableServers }: { userData: PlayerData, availableServers: PlayerData[] }) {
     return (
         <div className="w-full pb-[5%]">
 
@@ -55,8 +65,9 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
                 <Image className="bg-zinc-800 p-4 mb-5 rounded-full" alt="MinecraftRender" width={100} height={100} src={`https://skins.danielraybone.com/v1/render/head/${userData.Username}`} />
 
                 <h1 className="font-Protest text-6xl">{userData.Username}</h1>
-                <ServerSelectDropDown servers={availableServers} currentServer={userData.MCServer} username={userData.Username} />
-                <OnlineStatus username={userData.Username} lastseen={parseInt(userData.LastSeen.String)} />
+                <p className="text-zinc-400 text-xs pb-4">({userData.UUID.String})</p>
+                <ServerSelectDropDown servers={availableServers} currentServer={userData.MCServer} />
+                <OnlineStatus username={userData.Username} availableServers={availableServers} />
 
             </div>
 
@@ -107,7 +118,7 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
 
 function PlayerHistory({ uuid, username, server }: { uuid: string, username: string, server: string }) {
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
             <Suspense fallback={<p>Loading Messages...</p>}>
                 <MessageHistoryCard username={username} server={server} />
             </Suspense>

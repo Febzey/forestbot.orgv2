@@ -16,18 +16,35 @@ const UserOrServerSearch = () => {
         setInputValue(event.target.value);
     };
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
+
+        const regex = /^[@/]/;
+        if (!regex.test(inputValue)) {
+            setErrorMessage('Please use "@" for users and "/" for servers.');
+            return;
+        }
+
+        const data = await fetch("http://127.0.0.1:5000/api/v1/all-servers");
+        console.log(data);
+        const servers = await data.json();
+
+        if (inputValue.startsWith("/")) {
+            const cleanedValue = inputValue.replace(/\..*/, '');
+            const withoutSlash = cleanedValue.substring(1);
+
+            if (servers.includes(withoutSlash)) {
+                Router.push(`/s/${withoutSlash}`)
+                return;
+            }
+        }
+
+        const cleaned = inputValue.substring(1);
+
         // console.log('Submitted', inputValue);
 
-        // const regex = /^[@/]/;
-        // if (!regex.test(inputValue)) {
-        //     setErrorMessage('Please use "@" for users and "/" for servers.');
-        //     return;
-        // }
 
-
-        Router.push(`/u/${inputValue}`);
+        Router.push(`/u/${cleaned}`);
     }
 
     return (

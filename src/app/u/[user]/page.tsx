@@ -5,6 +5,8 @@ import UserProfileCard from "./profileCard"
 
 async function getUser(username: string) {
   try {
+
+    //change this in the golang api to convert the username to UUID based.
     const res = await fetch(`http://127.0.0.1:5000/api/v1/all-player-stats?username=${username}`, { cache: 'no-cache' })
     return res.json()
   } catch (err) {
@@ -31,7 +33,13 @@ export default async function Page({
 
 
 async function UserPageBuilder({ username, server }: { username: string, server?: string }) {
-  let data: PlayerData[] | undefined = await getUser(username)
+  let data: PlayerData[] | null | undefined;
+  
+  try {
+    data = await getUser(username)
+  } catch {
+    return notFound()
+  }
   if (!data) return notFound()
 
   const servers: string[] = [];
@@ -55,6 +63,6 @@ async function UserPageBuilder({ username, server }: { username: string, server?
   }
 
   return (
-    <UserProfileCard userData={serverPlayerData()} availableServers={servers} />
+    <UserProfileCard userData={serverPlayerData()} availableServers={data} />
   )
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 
-export default function ServerSelectDropDown({ servers, currentServer, username }: { servers: string[], currentServer: string, username: string}) {
+export default function ServerSelectDropDown({ servers, currentServer }: { servers: PlayerData[], currentServer: string}) {
     const [serverPickDropDown, setOpenServerDropDown] = useState(false)
 
     return (
@@ -21,8 +21,8 @@ export default function ServerSelectDropDown({ servers, currentServer, username 
                     {
                         servers.map((server, index) => {
                             return (
-                                <li key={index} onClick={() => { window.location.href = `/u/${username}?server=${server}` }}>
-                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{server}</a>
+                                <li key={index} onClick={() => { window.location.href = `/u/${server.Username}?server=${server.MCServer}` }}>
+                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{server.MCServer}</a>
                                 </li>
                             )
                         })

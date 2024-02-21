@@ -81,7 +81,7 @@ export default async function UserDataGraphs({ username, server }: { username: s
         return (
             <div className="bg-zinc-700/60 rounded rounded-lnone flex w-full p-4">
                 <div className="w-full h-full bg-zinc-800 rounded rounded-r-none p-8 shadow-2xl">
-                    <h3 className="text-lg text-center text-red-500">Failed to load graph data pls contact febzey</h3>
+                    <h3 className="text-lg text-center text-white font-Protest">No Data For The Last Week</h3>
                 </div>
             </div>
         )
