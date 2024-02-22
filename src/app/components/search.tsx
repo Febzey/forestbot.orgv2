@@ -53,7 +53,7 @@ const UserOrServerSearch = () => {
             {
                 errorMessage !== '' && searchErrorPopup({ errorMessage, setErrorMessage })
             }
-            <form className="flex items-center flex-col justify-center relative w-[28%] mt-[7%] mx-auto shadow-2xl shadow-zinc-800">
+            <form className="flex items-center flex-col justify-center relative w-[28%] mx-auto shadow-2xl shadow-zinc-800">
                 <label className="mr-auto text-white/80 text-sm py-2">Use " @ " when searching a player and " / " when searching a server.</label>
                 <div className="flex items-center flex-row justify-center w-full">
                     {inputValue === '' && (
