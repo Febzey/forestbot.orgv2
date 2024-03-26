@@ -38,7 +38,7 @@ const calculatePlaytimeSessions = async (data: PlayerActivityData[]): Promise<Pl
 
 
 async function getGraphData(username: string, server: string) {
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/specific-player-activity-weekly-report?username=${username}&server=new_test`, { cache: 'no-cache' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/specific-player-activity-weekly-report?username=${username}&server=new_test`, { cache: 'no-cache' });
     const playtime = await res.json();
     // try {
     //     return await api.getGraphData(username, server);

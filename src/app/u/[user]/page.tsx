@@ -7,7 +7,7 @@ async function getUser(username: string) {
   try {
 
     //change this in the golang api to convert the username to UUID based.
-    const res = await fetch(`http://127.0.0.1:5000/api/v1/all-player-stats?username=${username}`, { cache: 'no-cache' })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/all-player-stats?username=${username}`, { cache: 'no-cache' })
     return res.json()
   } catch (err) {
     return null;

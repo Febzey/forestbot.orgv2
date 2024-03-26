@@ -82,8 +82,8 @@ export default function PlayerActivityGraph({ data }: { data: UserCountData[] })
 
 
     return (
-        <div className="lg:w-[67%] w-[90%] mx-auto">
-            <h2 className="font-Protest text-4xl">Player Activity</h2>
+        <div className="mx-auto">
+            <h2 className="font-Protest text-3xl text-neutral-200 mt-5">Player Activity</h2>
 
             <Line data={mockData} options={options}/>
 

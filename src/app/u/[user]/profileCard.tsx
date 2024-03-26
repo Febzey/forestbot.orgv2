@@ -73,7 +73,7 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
 
             <div className="w-full  p-8 flex flex-col items-center justify-center">
 
-                <div className="flex w-full mt-[3%] mb-auto m-4 shadow-xl shadow-zinc-900  rounded">
+                <div className="flex lg:flex-row lg:gap-0 gap-4 flex-col w-full mt-[3%] mb-auto m-4 shadow-xl shadow-zinc-900  rounded">
 
                     {
                         /**
