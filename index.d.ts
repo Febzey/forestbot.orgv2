@@ -40,8 +40,32 @@ interface PlaytimeGraphProps {
   playtimeSessions: PlaytimeSession[];
 }
 
-type UserCountData = {
-  day_of_week: number,
-  hour_of_day: number,
-  user_count: number,
+type PlayerActivityHourlyResult = {
+  Weekday: number;
+  Activity: HourlyActivity[];
 };
+
+type HourlyActivity = {
+  Hour: number;
+  Logins: number;
+};
+
+// type ServerStatsProps struct {
+// 	TotalLogins   int `json:"total_logins"`
+// 	UniquePlayers int `json:"unique_players"`
+// 	UniqueLogins  int `json:"unique_logins"`
+
+// 	UserWithMostLogins struct {
+// 		Username   string `json:"username"`
+// 		LoginCount int    `json:"login_count"`
+// 	} `json:"user_with_most_logins"`
+// }
+type ServerStatsProps = {
+  TotalLogins: number;
+  UniquePlayers: number;
+  UniqueLogins: number;
+  UserWithMostLogins: {
+    Username: string;
+    LoginCount: number;
+  };
+}

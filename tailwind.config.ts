@@ -11,6 +11,8 @@ const config: Config = {
       backgroundImage: {
         "forestbot-banner": "url('/forestbot_new_no_text.png')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "wave-server": "url('/wave-server.svg')",
+        "leaderboard-bg": "url('/leaderboard.svg')",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },

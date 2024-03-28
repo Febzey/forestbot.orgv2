@@ -12,16 +12,10 @@ import { api } from "../../../../apiGetter";
 
 import { FaCircleDot } from "react-icons/fa6"
 import moment from "moment";
-//TODO: 
-//Times user has been seen in past week,
-//average playtime per day,
-//general activity (what does this mean?)
-//stats as in retention, average day played, average time played: example: most active around 7pm on weekdays; 2pm on weekends type thing.
 
 async function OnlineStatus({ username, availableServers }: { username: string, availableServers: PlayerData[] }) {
 
     const onlineCheck = await api.getOnlineCheck(username);
-    console.log(onlineCheck)
 
     let lastseen;
 
@@ -54,7 +48,7 @@ async function OnlineStatus({ username, availableServers }: { username: string, 
 
 export default function UserProfileCard({ userData, availableServers }: { userData: PlayerData, availableServers: PlayerData[] }) {
     return (
-        <div className="w-full pb-[5%]">
+        <div className="w-full pb-[4vh] pt-[8vh]">
 
             {
                 /**

@@ -17,9 +17,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="">
-                <section className="relative min-h-screen bg-gradient-to-r from-zinc-800 via-zinc-900 to-zinc-800">
-                    <NavBar />
+            <body className="min-h-screen bg-gradient-to-r from-zinc-800 via-zinc-900 to-zinc-800">
+            <NavBar />
+
+                <section>
 
                     {children}
                     <Footer />
