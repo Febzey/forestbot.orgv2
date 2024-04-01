@@ -9,22 +9,21 @@ async function getGraphData(server: string) {
 
     const d = await data.json();
 
+    console.log(d," dataaa")
 
-    return d.player_activity_by_hour;
+
+    return d;
 
 }
 
 export default async function GraphBuilder({ server }: { server: string} ) {
 
-    const serverData:PlayerActivityHourlyResult[]|any | null | undefined = await getGraphData(server);
-    //make a 5 sec timeout
-    // do it without commenting for fuck sakes
-    // const sleep = (time:number) => new Promise(res=>setTimeout(res,time))
+    let serverData:PlayerActivityHourlyResult[]|any | null | undefined = await getGraphData(server);
+    
+    if ("player_activity_by_hour" in serverData) {
+        serverData = serverData.player_activity_by_hour;
+    }
 
-    // await sleep(5000)
-   // console.log("Received data:", JSON.stringify(serverData));
-    
-    
     if (!serverData || serverData.length === 0) {
         return notFound()
     };

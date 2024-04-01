@@ -13,12 +13,13 @@ function PageContentBuilder({ server }: { server: string }) {
     return (
         <div className="min-h-screen w-full">
 
-            <div className="w-[79%] mx-auto  flex flex-col gap-10 items-center justify-center">
+            <div className="w-[79%] mx-auto  flex flex-col items-center justify-center">
                 <h2 className="text-8xl font-Protest first-letter:uppercase text-white">{server}</h2>
 
-
-                <Suspense fallback={<PageLoader/>}>
+                <Suspense fallback={<div>Loading...</div>}>
                     <MiscServerStats server={server} />
+                </Suspense>
+                <Suspense fallback={<PageLoader/>}>
                     <GraphBuilder server={server} />
                 </Suspense>
             </div>

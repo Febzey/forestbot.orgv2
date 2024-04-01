@@ -49,10 +49,10 @@ export default function PlayerActivityGraph({ data }: PlayerActivityGraphProps) 
     return {
       label: day,
       data: loginCounts,
-      borderColor: '#d946ef',
+      borderColor: '#10b981',
       backgroundColor: 'transparent',
-      pointBackgroundColor: '#d946ef',
-      pointBorderColor: '#d946ef',
+      pointBackgroundColor: '#10b981',
+      pointBorderColor: '#10b981',
 
     };
   });
@@ -106,7 +106,7 @@ export default function PlayerActivityGraph({ data }: PlayerActivityGraphProps) 
 
   return (
     <div className="mx-auto min-h-[80vh] h-auto">
-      <h2 className="font-Protest text-3xl text-neutral-200 mt-5">Player Activity</h2>
+      <h2 className="font-Protest text-3xl text-neutral-200">Player Activity</h2>
       <Line data={chartData} options={options} />
     </div>
   );

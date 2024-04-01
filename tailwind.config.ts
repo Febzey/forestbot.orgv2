@@ -15,6 +15,7 @@ const config: Config = {
         "leaderboard-bg": "url('/leaderboard.svg')",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "commands-bg": "url('/commands-bg.svg')",
       },
       fontFamily: { 
         sans: ["Inter", "sans-serif"],

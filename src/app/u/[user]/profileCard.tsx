@@ -41,6 +41,8 @@ async function OnlineStatus({ username, availableServers }: { username: string, 
                         <FaCircleDot className="text-red-400" />
                         <p>OFFLINE</p>
                     </>
+
+                    // ! TODO: ADD total deaths, total kills, total messages, total advancements. top part of card. similar to the server stats card.
             }
         </div>
     )

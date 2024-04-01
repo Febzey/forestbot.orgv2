@@ -68,4 +68,7 @@ type ServerStatsProps = {
     Username: string;
     LoginCount: number;
   };
+  TotalUsersSaved:   number
+	TotalAdvancements: number
+	TotalDeaths:       number
 }
