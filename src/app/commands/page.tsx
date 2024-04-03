@@ -1,5 +1,6 @@
 
-
+import { FaDiscord, FaRobot } from 'react-icons/fa';
+import Link from 'next/link';
 const commandList = [
     {
         cmd: 'ping',
@@ -100,9 +101,24 @@ export default function CommandsPage() {
 
     return (
         <div className="w-full min-h-screen lg:w-[50%] mx-auto  p-8">
-            <div className="pt-[18.5vh] flex flex-col w-full items-center justify-center text-white text-center">
-                <h1 className="text-7xl font-Protest">Commands<span className="text-emerald-400">.</span></h1>
-                <p className="text-lg text-neutral-300">ForestBot Commands. Learn what the bot can do both in-game and on Discord<span className="text-emerald-400">.</span></p>
+            <div className="pt-[18.5vh] flex flex-col w-full items-center justify-center text-center text-lg text-neutral-300">
+                <h1 className="text-7xl font-Protest text-white">Commands<span className="text-emerald-400">.</span></h1>
+                <p>ForestBot Commands. A Directory of discord and in-game Minecraft Commands<span className="text-emerald-400">.</span></p>
+                <div className="flex flex-col gap-2 items-center justify-center">
+
+                    <p>Click the button below to learn more about the bot and it's features.</p>
+                <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
+                <Link href="/features" className="px-8 duration-150 hover:bg-emerald-500 py-4 w-auto border-emerald-500 border-[1px] mt-3 font-Protest text-md shadow-xl rounded flex items-center flex-row justify-center gap-2">
+                        Learn more about the bot <FaRobot/>
+                    </Link>
+
+                    <a href="https://discord.com/oauth2/authorize?client_id=771280674602614825" target='_blank' className="px-8 duration-150 hover:bg-[#7785cc] py-4 w-auto border-[#7785cc] border-[1px] mt-3 font-Protest text-md shadow-xl rounded flex items-center flex-row justify-center gap-2">
+                        Invite ForestBot To Discord <FaDiscord/>
+                    </a>
+                </div>
+                <div className="z-50 my-16 h-[1px] border-t-0 bg-transparent mx-auto w-full bg-gradient-to-r from-transparent via-white to-transparent opacity-25"></div>
+
+                </div>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 items-start justify-evenly mt-12">

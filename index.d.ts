@@ -61,6 +61,7 @@ type HourlyActivity = {
 // 	} `json:"user_with_most_logins"`
 // }
 type ServerStatsProps = {
+  PlayerActivityHourlyResult: PlayerActivityHourlyResult[];
   TotalLogins: number;
   UniquePlayers: number;
   UniqueLogins: number;
@@ -68,7 +69,4 @@ type ServerStatsProps = {
     Username: string;
     LoginCount: number;
   };
-  TotalUsersSaved:   number
-	TotalAdvancements: number
-	TotalDeaths:       number
 }

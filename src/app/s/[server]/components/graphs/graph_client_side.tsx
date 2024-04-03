@@ -106,7 +106,7 @@ export default function PlayerActivityGraph({ data }: PlayerActivityGraphProps) 
 
   return (
     <div className="mx-auto min-h-[80vh] h-auto">
-      <h2 className="font-Protest text-3xl text-neutral-200">Player Activity</h2>
+      {/* <h2 className="font-Protest text-3xl text-neutral-200">Player Activity</h2> */}
       <Line data={chartData} options={options} />
     </div>
   );

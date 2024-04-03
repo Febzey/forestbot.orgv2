@@ -13,9 +13,11 @@ export default function HomePageContent() {
                 </div>
 
 
-                <div className="flex flex-col lg:flex-row gap-2 lg:gap-5 items-center mx-auto p-3 mt-[3%] mb-16">
+                <div className="flex flex-col lg:flex-row gap-2 lg:gap-5 items-center mx-auto p-3 mt-[3%] mb-16 text-center decoration-emerald-400">
                     <Link href="/commands" className="hover:text-emerald-400/90 underline-offset-2 underline decoration-[3px] pt-7 text-md duration-200">Commands</Link>
                     <a href="https://www.buymeacoffee.com/ForestBot" target="_blank" className="hover:text-emerald-400/90 underline-offset-2 underline decoration-[3px] lg:pt-7 text-md duration-200">Donate</a>
+                    <Link href="/features" className="hover:text-emerald-400/90 underline-offset-2 underline decoration-[3px] pt-7 text-md duration-200">About</Link>
+
                 </div>
 
                 <UserOrServerSearch />

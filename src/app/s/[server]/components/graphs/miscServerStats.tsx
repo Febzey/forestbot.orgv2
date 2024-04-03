@@ -1,68 +1,97 @@
+import HoverTooltip from "@/app/components/tooltips/tooltip";
 import { notFound } from "next/navigation";
-import { FaChartLine, FaUser, FaTrophy, FaSkull } from "react-icons/fa";
+import { FaUser, FaTrophy, FaSkull, FaChevronDown } from "react-icons/fa";
 
 
-async function getServerStats(server: string): Promise<ServerStatsProps> {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/server-stats?server=${server}`)
-    if (!data.ok) return notFound()
-    const d = await data.json();
-    return d;
-}
+export default async function MiscServerStats(
+    { totalLogins, UniquePlayers, UniqueLogins, UserWithMostLogins }:
+    { totalLogins: number, 
+      UniquePlayers: number, 
+      UniqueLogins: number,
+      UserWithMostLogins: { 
+        Username: string, 
+        LoginCount: number 
+    }}) {
 
-
-
-export default async function MiscServerStats({ server }: { server: string }) {
-
-    const serverStats = await getServerStats(server);
+    if (!UniqueLogins === undefined) return (
+        <div className="w-full py-8 px-2 text-3xl font-Protest italic text-white">
+            Failed to load server stats
+        </div>
+    )
     const statItems = [
-        { label: "Total Logins", value: serverStats.TotalLogins },
-        { label: "Unique Logins", value: serverStats.UniquePlayers },
-        { label: "New Users", value: serverStats.UniqueLogins },
-        { label: "Most Active User", value: `${serverStats.UserWithMostLogins.Username} (${serverStats.UserWithMostLogins.LoginCount} logins)` },
+        { label: "Total Logins", value: totalLogins },
+        { label: "Unique Logins", value: UniquePlayers },
+        { label: "New Users", value: UniqueLogins },
+        { label: "Most Active User", value: `${UserWithMostLogins.Username} (${UserWithMostLogins.LoginCount} logins)` },
 
     ];
-
-    console.log(serverStats, "stats")
-
-    // TotalUsersSaved   int
-    // TotalAdvancements int
-    // TotalDeaths       int
     return (
-        <div className="flex items-center justify-center flex-col gap-3 text-neutral-400 ">
-            <div className="bg-zinc-800 text-center mt-5 shadow-xl py-2 px-6 rounded-full text-neutral-400 italic flex items-center justify-center flex-row gap-5">
-                <div className="flex flex-col items-center justify-center gap-2 text-blue-400 font-Protest">
-                    <FaUser /> 13,440{serverStats.TotalUsersSaved}
-                </div>
-                <div className="flex flex-col text-center items-center justify-center gap-2 text-violet-400 font-Protest">
-                    <FaTrophy />  2234{serverStats.TotalAdvancements}
-                </div>
-                <div className="flex flex-col text-center items-center justify-center gap-2 text-red-400 font-Protest">
-                    <FaSkull /> 9932{serverStats.TotalDeaths}
-                </div>
-            </div>
-            
-            <div className="flex items-center justify-center flex-col gap-3 text-neutral-400 pt-11">
-                <div className="text-center w-full text-neutral-400 italic flex items-center justify-center flex-col">
-                    <p>
-                        All stats are from the past 7 days
-                    </p>
-                    <p className="flex items-center justify-center gap-1.5">
-                        Scroll down to see some leaderboards and other stats <FaChartLine />
-                    </p>
-                </div>
-            </div>
+        <div className="flex  flex-col  text-neutral-400 ">
+            <div className="z-50 mx-auto  my-12 h-px border-t-0 bg-transparent w-full bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25"></div>
 
-            <div className="mx-auto gap-5 flex flex-row mb-5">
+            <h2 className="text-2xl font-Protest text-white mr-auto">Server Stats</h2>
+            <div className=" gap-5 flex flex-row mb-12">
                 {statItems.map((item, index) => (
-                    <div key={index} className="bg-zinc-800 rounded shadow-lg">
+                    <div key={index} className="bg-zinc-800/70 shadow-xl">
                         <div className="rounded p-7">
-                            <p className="text-2xl text-neutral-100 font-Protest">{item.label}</p>
-                            <p className="text-lg text-white font-Protest">{item.value}</p>
+                            <p className="text-md text-neutral-400 font-Protest">{item.label}</p>
+                            <p className="text-4xl text-neutral-100 font-Protest">{item.value}</p>
                         </div>
                     </div>
                 ))}
+                <div className="bg-zinc-800/70 ml-auto flex flex-row items-center shadow-xl justify-center p-7 gap-4">
+                    <div className="rounded">
+                        <p className="text-md text-neutral-400 font-Protest">Viewing for</p>
+                        <p className="text-4xl text-neutral-100 font-Protest">Past 7 dayss</p>
+                    </div>
+                    <FaChevronDown className="text-4xl text-neutral-100" />
+                </div>
             </div>
         </div>
     )
 
+}
+
+
+
+
+
+
+
+
+async function getOverallServerStats(server: string): Promise<any> {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/server-stats-total-overall?server=${server}`)
+    if (!data.ok) return null
+    const d = await data.json();
+    return d;
+
+}
+export async function OverAllSavedServerData({ server }: { server: string }) {
+   const serverStats = await getOverallServerStats(server);
+
+    if (serverStats === null) return (
+        <div className="py-3 text-center text-neutral-400 bg-zinc-800 p-2 rounded w-auto mt-4">
+            No server stats available
+        </div>
+    )
+
+    return (
+        <div className="text-center pt-5 py-3 px-14 text-xl rounded-full text-neutral-400 flex items-center justify-between flex-row gap-5">
+            <HoverTooltip text="Total Users Saved" >
+                <div className="flex flex-col text-center items-center justify-center gap-2 text-green-400 font-Protest">
+                    <FaUser /> {serverStats.TotalUsersSaved}
+                </div>
+            </HoverTooltip>
+            <HoverTooltip text="Total Advancements Saved" >
+                <div className="flex flex-col text-center items-center justify-center gap-2 text-violet-400 font-Protest">
+                    <FaTrophy /> {serverStats.TotalAdvancements}
+                </div>
+            </HoverTooltip>
+            <HoverTooltip text="Total Deaths Saved" >
+                <div className="flex flex-col text-center items-center justify-center gap-2 text-red-400 font-Protest">
+                    <FaSkull /> {serverStats.TotalDeaths}
+                </div>
+            </HoverTooltip>
+        </div>
+    )
 }

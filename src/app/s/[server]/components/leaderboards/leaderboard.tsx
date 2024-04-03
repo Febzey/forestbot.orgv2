@@ -21,7 +21,7 @@ export default async function Top5Leaderboards({ server }: { server: string }) {
                             <p className="text-neutral-400 text-2xl">No data available</p>
                             :
                             data.Top5Killers.map((item: any, index: number) => (
-                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded shadow-lg p-7 flex flex-col items-center justify-center gap-2">
+                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded-lg shadow-lg p-7 flex flex-col items-center justify-center gap-2">
                                     <Image alt={`${item.PlayerName}-body`} src={`https://crafatar.com/renders/body/${item.Uuid}`} width={50} height={50} />
                                     <p className="text-2xl text-neutral-200 font-Protest">{item.PlayerName}</p>
                                     <p className="text-lg text-neutral-400">{item.KillCount} kills</p>
@@ -40,7 +40,7 @@ export default async function Top5Leaderboards({ server }: { server: string }) {
                             <p className="text-neutral-400 text-2xl">No data available</p>
                             :
                             data.Top5PVPDeaths.map((item: any, index: number) => (
-                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100min-w-[18%] rounded shadow-lg p-7 flex flex-col items-center justify-center gap-2">
+                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100min-w-[18%] rounded-lg shadow-lg p-7 flex flex-col items-center justify-center gap-2">
                                     <Image alt={`${item.PlayerName}-body`} src={`https://crafatar.com/renders/body/${item.Uuid}`} width={50} height={50} />
                                     <p className="text-2xl text-neutral-200 font-Protest">{item.PlayerName}</p>
                                     <p className="text-lg text-neutral-400">{item.PVPDeathCount} pvp deaths</p>
@@ -59,7 +59,7 @@ export default async function Top5Leaderboards({ server }: { server: string }) {
                             <p className="text-neutral-400 text-2xl">No data available</p>
                             :
                             data.Top5PVEDeaths.map((item: any, index: number) => (
-                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded shadow-lg p-7 flex flex-col items-center justify-center gap-2">
+                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded-lg shadow-lg p-7 flex flex-col items-center justify-center gap-2">
                                     <Image alt={`${item.PlayerName}-body`} src={`https://crafatar.com/renders/body/${item.Uuid}`} width={50} height={50} />
                                     <p className="text-2xl text-neutral-200 font-Protest">{item.PlayerName}</p>
                                     <p className="text-lg text-neutral-400">{item.DeathCount} pve deaths</p>
@@ -78,7 +78,7 @@ export default async function Top5Leaderboards({ server }: { server: string }) {
                             <p className="text-neutral-400 text-2xl">No data available</p>
                             :
                             data.Top5Advancements.map((item: any, index: number) => (
-                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded shadow-lg p-7 flex flex-col items-center justify-center gap-2">
+                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded-lg shadow-lg p-7 flex flex-col items-center justify-center gap-2">
                                     <Image alt={`${item.PlayerName}-body`} src={`https://crafatar.com/renders/body/${item.Uuid}`} width={50} height={50} />
                                     <p className="text-2xl text-neutral-200 font-Protest">{item.PlayerName}</p>
                                     <p className="text-lg text-neutral-400">{item.AdvancementCount} advancements</p>
@@ -95,7 +95,7 @@ export default async function Top5Leaderboards({ server }: { server: string }) {
                         data.Top5Logins === null || data.Top5Logins === undefined
                             ? <p className="text-neutral-400 text-2xl">No data available</p>
                             : (data.Top5Logins as any).map((item: any, index: number) => (
-                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded shadow-lg p-7 flex flex-col items-center justify-center gap-2">
+                                <Link href={`/u/${item.PlayerName}`} key={index} className="bg-zinc-800 hover:bg-zinc-700 duration-100 min-w-[18%] rounded-lg shadow-lg p-7 flex flex-col items-center justify-center gap-2">
                                     <Image alt={`${item.PlayerName}-body`} src={`https://crafatar.com/renders/body/${item.Uuid}`} width={50} height={50} />
                                     <p className="text-2xl text-neutral-200 font-Protest">{item.PlayerName}</p>
                                     <p className="text-lg text-neutral-400">{item.AdvancementCount} Logins</p>
