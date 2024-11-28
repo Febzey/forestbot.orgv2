@@ -24,7 +24,7 @@ export default async function MessageHistoryCard({ username, server }: { usernam
             <ul className="bg-zinc-800 overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
                 {
                     messages.map((message, index) => {
-                        const formattedDate = message.date?.String ? moment(parseInt(message.date.String)).format("MMM, Do, YYYY HH:mm") : ""
+                        const formattedDate = message.date ? moment(parseInt(message.date)).format("MMM, Do, YYYY HH:mm") : ""
                         return (
                             <li key={index} className="flex flex-row justify-between items-center bg-zinc-700/60 p-2 rounded">
                                 <span className="max-w-[70%]">{message.message}</span>

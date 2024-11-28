@@ -20,34 +20,40 @@ const UserOrServerSearch = () => {
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        const regex = /^[@/]/;
-        if (!regex.test(inputValue)) {
-            setErrorMessage('Please use "@" for users and "/" for servers.');
+        // const regex = /^[@/]/;
+        // if (!regex.test(inputValue)) {
+        //     setErrorMessage('Please use "@" for users and "/" for servers.');
+        //     return;
+        // }
+
+        // setIsLoading(true);
+
+        // const data = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/all-servers`);
+        // console.log(data);
+        // const servers = await data.json();
+
+
+        // // server search since the slash / is used
+        // if (inputValue.startsWith("/")) {
+        //     const cleanedValue = inputValue.replace(/\..*/, '');
+        //     const withoutSlash = cleanedValue.substring(1);
+
+        //     if (servers.includes(withoutSlash)) {
+        //         Router.push(`/s/${withoutSlash}`)
+        //         setIsLoading(false);
+        //         return;
+        //     }
+        // }
+
+        // const cleaned = inputValue.substring(1);
+
+
+        if (!inputValue) {
+            setErrorMessage('Please enter a username.');
             return;
         }
 
-        setIsLoading(true);
-
-        const data = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/all-servers`);
-        console.log(data);
-        const servers = await data.json();
-
-
-        // server search since the slash / is used
-        if (inputValue.startsWith("/")) {
-            const cleanedValue = inputValue.replace(/\..*/, '');
-            const withoutSlash = cleanedValue.substring(1);
-
-            if (servers.includes(withoutSlash)) {
-                Router.push(`/s/${withoutSlash}`)
-                setIsLoading(false);
-                return;
-            }
-        }
-
-        const cleaned = inputValue.substring(1);
-
-        Router.push(`/u/${cleaned}`);
+        Router.push(`/u/${inputValue}`);
 
         setIsLoading(false);    
     }
@@ -59,11 +65,11 @@ const UserOrServerSearch = () => {
                 errorMessage !== '' && searchErrorPopup({ errorMessage, setErrorMessage })
             }
             <form className="flex items-center flex-col justify-center relative mt-[1rem] w-[70%] m-3 lg:w-[28%] mx-auto shadow-2xl shadow-zinc-800">
-                <label className="mr-auto text-white/80 text-sm py-2">Use " @ " when searching a player and " / " when searching a server.</label>
+                <label className="mr-auto text-white/80 text-sm py-2">Search a user! <span className="text-white/40 text-xs"> (server searching available soon!)</span></label>
                 <div className="flex items-center flex-row justify-center w-full">
                     {inputValue === '' && (
                         <div className="typing-placeholder absolute left-3 text-white/80">
-                            <ReactTypingEffect text={['@username', '/server', '@neofetching', '/simplyvanilla', '@ForestBot', '/vanillaanarchy']} speed={100} eraseSpeed={120} eraseDelay={1400} />
+                            <ReactTypingEffect text={['matcha255', 'febzey_', 'RA1NING', 'ilidrael', 'binchita', 'PeanutOfEG']} speed={100} eraseSpeed={120} eraseDelay={1400} />
                         </div>
                     )}
                     <input

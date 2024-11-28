@@ -21,8 +21,8 @@ export default function ServerSelectDropDown({ servers, currentServer }: { serve
                     {
                         servers.map((server, index) => {
                             return (
-                                <li key={index} onClick={() => { window.location.href = `/u/${server.Username}?server=${server.MCServer}` }}>
-                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{server.MCServer}</a>
+                                <li key={index} onClick={() => { window.location.href = `/u/${server.username}?server=${server.mc_server}` }}>
+                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{server.mc_server}</a>
                                 </li>
                             )
                         })

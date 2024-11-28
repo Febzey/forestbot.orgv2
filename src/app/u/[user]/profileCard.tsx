@@ -20,14 +20,14 @@ async function OnlineStatus({ username, availableServers }: { username: string, 
     let lastseen;
 
     if (onlineCheck?.server) {
-        let str = availableServers.find(user => user.MCServer === onlineCheck.server)?.LastSeen.String;
+        let str = availableServers.find(user => user.mc_server === onlineCheck.server)?.lastseen;
         lastseen = str ? moment(parseInt(str)).fromNow() : "N/A";
     }
 
     return (
         <div className="mx-auto pt-5 flex text-sm font-Protest text-zinc-200 flex-row gap-2 items-center justify-center">
             {
-                onlineCheck.online === "true"
+                onlineCheck?.online
                     ?
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row gap-1 items-center justify-center">
@@ -42,7 +42,7 @@ async function OnlineStatus({ username, availableServers }: { username: string, 
                         <p>OFFLINE</p>
                     </>
 
-                    // ! TODO: ADD total deaths, total kills, total messages, total advancements. top part of card. similar to the server stats card.
+                // ! TODO: ADD total deaths, total kills, total messages, total advancements. top part of card. similar to the server stats card.
             }
         </div>
     )
@@ -58,12 +58,12 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
                  */
             }
             <div className="gap-1 flex items-center flex-col  relative mb-auto mt-[6%] ">
-                <Image className="bg-zinc-800 p-4 mb-5 rounded-full" alt="MinecraftRender" width={100} height={100} src={`https://skins.danielraybone.com/v1/render/head/${userData.Username}`} />
+                <Image className="bg-zinc-800 p-4 mb-5 rounded-full" alt="MinecraftRender" width={100} height={100} src={`https://skins.danielraybone.com/v1/render/head/${userData.username}`} />
 
-                <h1 className="font-Protest text-6xl">{userData.Username}</h1>
-                <p className="text-zinc-400 text-xs pb-4">({userData.UUID.String})</p>
-                <ServerSelectDropDown servers={availableServers} currentServer={userData.MCServer} />
-                <OnlineStatus username={userData.Username} availableServers={availableServers} />
+                <h1 className="font-Protest text-6xl">{userData.username}</h1>
+                <p className="text-zinc-400 text-xs pb-4">({userData.uuid})</p>
+                <ServerSelectDropDown servers={availableServers} currentServer={userData.mc_server} />
+                <OnlineStatus username={userData.username} availableServers={availableServers} />
 
             </div>
 
@@ -86,12 +86,14 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
                          * player activity Graph
                          */
                     }
+
                     <Suspense fallback={<GraphLoadingSkeleton />}>
                         <div className="bg-zinc-700/60 rounded rounded-l-none flex w-full p-4">
-                            <UserDataGraphs username={userData.Username} server={userData.MCServer} />
-                            {/* <GenerateGraphServerSide username={userData.Username} server={userData.MCServer} /> */}
+                            <UserDataGraphs username={userData.username} server={userData.mc_server} />
+
                         </div>
                     </Suspense>
+
 
                 </div>
 
@@ -101,7 +103,7 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
                      */
                 }
                 <div className="w-full flex h-auto min-h-[100vh] m-4 bg-zinc-700 rounded p-4 shadow-2xl">
-                    <PlayerHistory uuid={userData.UUID.String} username={userData.Username} server={userData.MCServer} />
+                    <PlayerHistory uuid={userData.uuid} username={userData.username} server={userData.mc_server} />
                 </div>
 
 

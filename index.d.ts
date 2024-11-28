@@ -1,26 +1,18 @@
-type PlayerData = {
-  Username: string;
-  Kills: number;
-  Deaths: number;
-  Joindate: string;
-  LastSeen: {
-    String: string;
-    Valid: boolean;
-  };
-  UUID: {
-    String: string;
-    Valid: boolean;
-  };
-  Playtime: number;
-  Joins: number;
-  Leaves: number;
-  LastDeathTime: number;
-  LastDeathString: {
-    String: string;
-    Valid: boolean;
-  };
-  MCServer: string;
-};
+type PlayerData = { 
+  username: string,
+  kills: number,
+  deaths: number,
+  joindate: string,
+  lastseen: string,
+  uuid: string,
+  playtime: number,
+  joins: number,
+  lastdeathString: string,
+  lastdeathTime: number,
+  id: number
+  mc_server: string
+}
+
 
 
 interface PlayerActivityData {

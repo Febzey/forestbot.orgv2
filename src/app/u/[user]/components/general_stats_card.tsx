@@ -7,8 +7,8 @@ async function QuoteBlock({ username, server }: { username: string, server: stri
     const quoteData = await api.getQuote(username, server);
 
     const formattedQuote = async () => {
-        if (!quoteData || !quoteData.message || !quoteData.Date?.String) return "N/A";
-        return `${quoteData.message} - ${moment(parseInt(quoteData.Date.String)).format('MMM, Do, YYYY')}, ${moment(parseInt(quoteData.Date.String)).fromNow()}`;
+        if (!quoteData || !quoteData.message ) return "N/A";
+        return `${quoteData.message} - ${moment(parseInt(quoteData.date)).format('MMM, Do, YYYY')}, ${moment(parseInt(quoteData.date)).fromNow()}`;
     }
 
     return (
@@ -31,7 +31,7 @@ async function LastAdvancementBlock({ username, server }: { username: string, se
             '<span class="text-purple-500">[$1]</span>'
         );
 
-        const formattedText = `${highlightedText} - ${moment(parseInt(advancementData[0].time)).format('MMM, Do, YYYY')}, ${moment(parseInt(advancementData[0].time)).fromNow()}`;
+        const formattedText = `${highlightedText} - ${moment(Number(advancementData[0].time)).format('MMM, Do, YYYY')}, ${moment(Number(advancementData[0].time)).fromNow()}`;
 
         return formattedText;
     };
@@ -52,7 +52,7 @@ async function LastKillBlock({ username, server }: { username: string, server: s
     const lastKillData = await api.getKills(uuid as string, server, 1, "DESC");
     const formattedLastKill = () => {
         if (!lastKillData || lastKillData.length === 0) return "N/A";
-        return `${lastKillData[0].death_message} - ${moment(parseInt(lastKillData[0].time)).format('MMM, Do, YYYY')}, ${moment(parseInt(lastKillData[0].time)).fromNow()}`;
+        return `${lastKillData[0].death_message} - ${moment(Number(lastKillData[0].time)).format('MMM, Do, YYYY')}, ${moment(Number(lastKillData[0].time)).fromNow()}`;
     }
 
     return (
@@ -98,7 +98,7 @@ const formattedPlaytime = (pt: number) => {
  * 
  */
 export async function GeneralStatsSection(data: PlayerData) {
-    const { Username, Joindate, LastSeen, Playtime, Joins, Leaves, Kills, Deaths, LastDeathTime, UUID, LastDeathString, MCServer } = data
+    const { username, joindate, lastseen, playtime, joins, kills, deaths, lastdeathTime, uuid, lastdeathString, mc_server } = data
 
     //const [quote, setQuote] = useState("N/A");
     const formattedJoindate = (jd: string) => {
@@ -122,28 +122,28 @@ export async function GeneralStatsSection(data: PlayerData) {
         <>
             <h1 className="font-Protest text-4xl underline-offset-[8px] decoration-[8px] underline decoration-emerald-400">General Statistics</h1>
             <div className="grid grid-cols-2 gap-8">
-                <GeneralStatBlock stat={Username} label={"Username"} style={["text-[#f6e05e]", "border-l-[#f6e05e]"]} />
-                <GeneralStatBlock stat={formattedJoindate(Joindate)} label={"Join Date"} style={["text-[#84cc16]", "border-l-[#84cc16]"]} />
-                <GeneralStatBlock stat={`${moment(parseInt(LastSeen.String)).format('MMM, Do, YYYY')}, ${moment(parseInt(LastSeen.String)).fromNow()}`} label={"Last Seen"} style={["text-[#22c55e]", "border-l-[#22c55e]"]} />
-                <GeneralStatBlock stat={formattedPlaytime(Playtime)} label={"Playtime"} style={['text-[#06b6d4]', "border-l-[#06b6d4]"]} />
-                <GeneralStatBlock stat={Kills.toString()} label={"Kills"} style={['text-[#f87171]', "border-l-[#f87171]"]} />
-                <GeneralStatBlock stat={Deaths.toString()} label={"Deaths"} style={['text-[#f87171]', "border-l-[#f87171]"]} />
-                <GeneralStatBlock stat={Joins.toString()} label={"Joins"} style={['text-[#60a5fa]', "border-l-[#60a5fa]"]} />
-                <GeneralStatBlock stat={Joins.toString()} label={"Leaves"} style={['text-[#60a5fa]', "border-l-[#60a5fa]"]} />
+                <GeneralStatBlock stat={username} label={"Username"} style={["text-[#f6e05e]", "border-l-[#f6e05e]"]} />
+                <GeneralStatBlock stat={formattedJoindate(joindate)} label={"Join Date"} style={["text-[#84cc16]", "border-l-[#84cc16]"]} />
+                <GeneralStatBlock stat={`${moment(parseInt(lastseen)).format('MMM, Do, YYYY')}, ${moment(parseInt(lastseen)).fromNow()}`} label={"Last Seen"} style={["text-[#22c55e]", "border-l-[#22c55e]"]} />
+                <GeneralStatBlock stat={formattedPlaytime(playtime)} label={"Playtime"} style={['text-[#06b6d4]', "border-l-[#06b6d4]"]} />
+                <GeneralStatBlock stat={kills.toString()} label={"Kills"} style={['text-[#f87171]', "border-l-[#f87171]"]} />
+                <GeneralStatBlock stat={deaths.toString()} label={"Deaths"} style={['text-[#f87171]', "border-l-[#f87171]"]} />
+                <GeneralStatBlock stat={joins.toString()} label={"Joins"} style={['text-[#60a5fa]', "border-l-[#60a5fa]"]} />
+                <GeneralStatBlock stat={joins.toString()} label={"Leaves"} style={['text-[#60a5fa]', "border-l-[#60a5fa]"]} />
             </div>
 
-            <GeneralStatLongBlock stat={formattedLastDeath(LastDeathTime, LastDeathString.String)} label="Last Death" style={["text-[#f43f5e]", "border-l-[#f43f5e]"]} />
+            <GeneralStatLongBlock stat={formattedLastDeath(lastdeathTime, lastdeathString)} label="Last Death" style={["text-[#f43f5e]", "border-l-[#f43f5e]"]} />
 
             <Suspense fallback={<p>Loading Last Kill...</p>}>
-                <LastKillBlock username={Username} server={MCServer} />
+                <LastKillBlock username={username} server={mc_server} />
             </Suspense>
 
             <Suspense fallback={<p>Loading Random Quote...</p>}>
-                <QuoteBlock username={Username} server={MCServer} />
+                <QuoteBlock username={username} server={mc_server} />
             </Suspense>
 
             <Suspense fallback={<p>Loading Last Advancement...</p>}>
-                <LastAdvancementBlock username={Username} server={MCServer} />
+                <LastAdvancementBlock username={username} server={mc_server} />
             </Suspense>
         </>
         // </div>

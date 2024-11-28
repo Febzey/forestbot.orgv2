@@ -69,6 +69,46 @@ const commandList = [
     {
         cmd: 'wp',
         desc: 'See who has the worst ping'
+    },
+    {
+        cmd: 'offlinemsg <user> <message>',
+        desc: 'Send a user an offlinemsg'
+    }, 
+    {
+        cmd: 'lastadvancement <user>',
+        desc: 'See the last advancement a user got'
+    },
+    {
+        cmd: 'advancements <user>',
+        desc: 'See the number of advancements a user has'
+    },
+    {
+        cmd: 'lastkill',
+        desc: 'See the last kill a user'
+    },
+    {
+        cmd: 'iam',
+        desc: 'Set a self user description'
+    },
+    {
+        cmd: 'whois',
+        desc: 'Get a users description'
+    },
+    {
+        cmd: 'faq',
+        desc: 'Get a list of frequently asked questions'
+    },
+    {
+        cmd: 'faqadd <text>',
+        desc: 'Add a frequently asked question'
+    },
+    {
+        cmd: 'wordcount <user> <text>',
+        desc: 'Counts the number of words a user has sent'
+    },
+    {
+        cmd: 'lastmessage',
+        desc: 'See the last message a user sent'
     }
 
 ];
@@ -79,7 +119,7 @@ const discordCommands = [
         desc: 'Get an image of the in-game Tablist'
     },
     {
-        cmd: 'stats',
+        cmd: 'search',
         desc: 'Get all statistics for the user you searched'
     },
     {
