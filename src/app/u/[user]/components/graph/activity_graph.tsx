@@ -30,7 +30,7 @@ const Graph = ({ aggregatedData }: { aggregatedData: { day: string, playtime: nu
     // Convert the playtime from minutes to hours (rounded to 2 decimal places)
 
     //@ts-ignore
-    if (!aggregatedData || aggregatedData.length === 0 || aggregatedData === undefined || aggregatedData === null || aggregatedData["success"] === false) { 
+    if (!aggregatedData || aggregatedData.length === 0 || aggregatedData === undefined || aggregatedData === null) { 
         return (
             <div className='mt-10 w-full h-fit my-auto flex justify-center items-center'>
                 <p className='text-center text-gray-500 italic'>No data available. Time to play and gather some stats!</p>

@@ -1,5 +1,5 @@
 import moment from "moment";
-import { api } from "../../../../../../apiGetter";
+import { api } from "../../../../../apiGetter";
 
 
 export default async function MessageHistoryCard({ username, server }: { username: string, server: string }) {

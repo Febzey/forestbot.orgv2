@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import Loading from "./loading"
 import { notFound } from "next/navigation"
 import UserProfileCard from "./profileCard"
-import { api } from "../../../../apiGetter"
+import { api } from "../../../apiGetter"
 
 
 async function getUser(username: string) {

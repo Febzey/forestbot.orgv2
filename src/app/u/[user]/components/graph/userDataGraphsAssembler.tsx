@@ -1,13 +1,18 @@
 import { FaCube } from "react-icons/fa";
 import Graph from "./activity_graph";
-import { api } from "../../../../../../apiGetter";
+import { api } from "../../../../../apiGetter";
 
 async function getGraphData(username: string, server: string) {
     const uuid = await api.convertUsernameToUuid(username);
 
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/player/playtime?uuid=${uuid}&date=${Date.now()}&server=${server}`, { cache: 'no-cache' });
-        return res.json();
+        const data = await res.json();;
+        if (data["success"] === false) { 
+            return null;
+        } 
+
+        return data;
     } catch (err) {
         return null;
     }
@@ -15,7 +20,7 @@ async function getGraphData(username: string, server: string) {
 
 export default async function UserDataGraphs({ username, server }: { username: string, server: string }) {
     const data = await getGraphData(username, server) as any[];
-    if (!data || data.length === 0) {
+    if (!data || data.length === 0 || data === undefined || data === null) {
         return (
             <div className="bg-zinc-700/60 rounded rounded-lnone flex w-full p-4">
                 <div className="w-full h-full bg-zinc-800 rounded rounded-r-none p-8 shadow-2xl">

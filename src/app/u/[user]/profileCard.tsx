@@ -8,7 +8,7 @@ import MessageHistoryCard from "./components/playerHistory/messages_history";
 import AdvancementHistoryCard from "./components/playerHistory/advancement_history";
 import PlayerDeathHistory from "./components/playerHistory/death_history";
 import PlayerKillHistory from "./components/playerHistory/kill_history";
-import { api } from "../../../../apiGetter";
+import { api } from "../../../apiGetter";
 
 import { FaCircleDot } from "react-icons/fa6"
 import moment from "moment";
@@ -30,7 +30,7 @@ async function OnlineStatus({ username, availableServers }: { username: string, 
                 onlineCheck?.online
                     ?
                     <div className="flex flex-col gap-2">
-                        <div className="flex flex-row gap-1 items-center justify-center">
+                        <div className="flex flex-col gap-1 items-center justify-center">
                             <FaCircleDot className="text-green-400" />
                             <p>{onlineCheck.server}</p>
                         </div>

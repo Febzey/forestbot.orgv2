@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Suspense } from "react";
-import { api } from "../../../../../apiGetter";
+import { api } from "../../../../apiGetter";
 
 
 async function QuoteBlock({ username, server }: { username: string, server: string }) {

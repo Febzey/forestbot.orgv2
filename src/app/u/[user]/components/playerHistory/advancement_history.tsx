@@ -1,5 +1,5 @@
 import moment from "moment";
-import { api } from "../../../../../../apiGetter"
+import { api } from "../../../../../apiGetter"
 
 
 export default async function AdvancementHistoryCard({ uuid, server }: { uuid: string, server: string }) {
