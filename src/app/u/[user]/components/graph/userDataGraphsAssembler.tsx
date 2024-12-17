@@ -6,7 +6,7 @@ async function getGraphData(username: string, server: string) {
     const uuid = await api.convertUsernameToUuid(username);
 
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/player/playtime?uuid=${uuid}&date=${Date.now()}&server=${server}`, { cache: 'no-cache' });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/player/playtime?uuid=${uuid}&date=${Date.now()}&server=${server}&duration=1_week`, { cache: 'no-cache' });
         const data = await res.json();;
         if (data["success"] === false) { 
             return null;
