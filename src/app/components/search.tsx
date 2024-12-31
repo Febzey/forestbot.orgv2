@@ -17,21 +17,22 @@ const UserOrServerSearch = () => {
         e.preventDefault();
         setIsLoading(true);
 
-        //make a few 10 sec timeout
-        await new Promise(r => setTimeout(r, 10000));
-
         if (!inputValue) {
-            setErrorMessage('Please enter a username.');
+            setErrorMessage('Please enter a username or server name.');
+            setIsLoading(false);
             return;
         }
 
-        Router.push(`/u/${inputValue}`);
+        if (inputValue.startsWith('/')) {
+            Router.push(`/s${inputValue}`);
+        } else {
+            Router.push(`/u/${inputValue}`);
+        }
 
         setIsLoading(false);
     }
 
     return (
-
         <>
             {
                 errorMessage !== '' && searchErrorPopup({ errorMessage, setErrorMessage })
@@ -39,7 +40,7 @@ const UserOrServerSearch = () => {
             <form className="flex items-center justify-center flex-col lg:mt-0 mt-12 w-full max-w-md  border-green-300 border-[1px] lg:mr-[11%] rounded-xl shadow-lg p-8 space-y-6">
                 <div className="text-center text-white">
                     <h2 className="text-3xl  font-Protest">Search The Database</h2>
-                    <p className="text-sm text-white/70">Search for a server or a user.</p>
+                    <p className="text-sm text-white/70">Search for a server or a user. <br></br>use " <span className="font-bold">/</span> " when searching for a server</p>
                 </div>
 
                 <div className="relative w-full">
@@ -65,15 +66,11 @@ const UserOrServerSearch = () => {
                     </button>
                 </div>
             </form>
-
-
         </>
     );
 };
 
 export default UserOrServerSearch;
-
-
 
 const searchErrorPopup = ({ errorMessage, setErrorMessage }: { errorMessage: string, setErrorMessage: React.Dispatch<React.SetStateAction<string>> }) => {
     return (
@@ -89,7 +86,6 @@ const searchErrorPopup = ({ errorMessage, setErrorMessage }: { errorMessage: str
                     <p>{errorMessage}</p>
                 </div>
             </div>
-
         </div>
     )
 }
