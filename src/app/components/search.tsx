@@ -1,17 +1,13 @@
 "use client";
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ReactTypingEffect from 'react-typing-effect';
 import { FaTimes, FaSpinner } from 'react-icons/fa';
 
 const UserOrServerSearch = () => {
     const Router = useRouter();
-
     const [inputValue, setInputValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
 
     const handleInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputValue(event.target.value);
@@ -19,34 +15,10 @@ const UserOrServerSearch = () => {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
+        setIsLoading(true);
 
-        // const regex = /^[@/]/;
-        // if (!regex.test(inputValue)) {
-        //     setErrorMessage('Please use "@" for users and "/" for servers.');
-        //     return;
-        // }
-
-        // setIsLoading(true);
-
-        // const data = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/all-servers`);
-        // console.log(data);
-        // const servers = await data.json();
-
-
-        // // server search since the slash / is used
-        // if (inputValue.startsWith("/")) {
-        //     const cleanedValue = inputValue.replace(/\..*/, '');
-        //     const withoutSlash = cleanedValue.substring(1);
-
-        //     if (servers.includes(withoutSlash)) {
-        //         Router.push(`/s/${withoutSlash}`)
-        //         setIsLoading(false);
-        //         return;
-        //     }
-        // }
-
-        // const cleaned = inputValue.substring(1);
-
+        //make a few 10 sec timeout
+        await new Promise(r => setTimeout(r, 10000));
 
         if (!inputValue) {
             setErrorMessage('Please enter a username.');
@@ -55,7 +27,7 @@ const UserOrServerSearch = () => {
 
         Router.push(`/u/${inputValue}`);
 
-        setIsLoading(false);    
+        setIsLoading(false);
     }
 
     return (
@@ -64,27 +36,37 @@ const UserOrServerSearch = () => {
             {
                 errorMessage !== '' && searchErrorPopup({ errorMessage, setErrorMessage })
             }
-            <form className="flex items-center flex-col justify-center relative mt-[1rem] w-[70%] m-3 lg:w-[28%] mx-auto shadow-2xl shadow-zinc-800">
-                <label className="mr-auto text-white/80 text-sm py-2">Search a user! <span className="text-white/40 text-xs"> (server searching available soon!)</span></label>
-                <div className="flex items-center flex-row justify-center w-full">
-                    {inputValue === '' && (
-                        <div className="typing-placeholder absolute left-3 text-white/80">
-                            <ReactTypingEffect text={['matcha255', 'febzey_', 'RA1NING', 'ilidrael', 'binchita', 'PeanutOfEG']} speed={100} eraseSpeed={120} eraseDelay={1400} />
-                        </div>
-                    )}
+            <form className="flex items-center justify-center flex-col lg:mt-0 mt-12 w-full max-w-md  border-green-300 border-[1px] lg:mr-[11%] rounded-xl shadow-lg p-8 space-y-6">
+                <div className="text-center text-white">
+                    <h2 className="text-3xl  font-Protest">Search The Database</h2>
+                    <p className="text-sm text-white/70">Search for a server or a user.</p>
+                </div>
+
+                <div className="relative w-full">
                     <input
                         type="text"
                         value={inputValue}
                         onChange={handleInputChange}
-                        className="bg-zinc-500/70 text-white border-2 border-transparent rounded rounded-r-none p-4 w-full"
+                        className="w-full p-5 rounded-lg bg-white/10 text-white placeholder-white/60 border-green-300 border-[2px] focus:outline-none focus:ring-2 focus:ring-emerald-400 transition duration-300 ease-in-out"
+                        placeholder="Search for a user or server..."
                     />
-                    <button onClick={(e) => handleSubmit(e)} className="bg-emerald-400/90 text-white border-2 border-emerald-400/90 rounded rounded-l-none p-4 w-1/4 font-Protest hover:bg-emerald-600 hover:border-emerald-600 duration-200">
-                         {
-                            isLoading ? <FaSpinner className="animate-spin mx-auto text-center text-2xl" /> : "Search"
-                         }
+                </div>
+
+                <div className="w-full">
+                    <button
+                        onClick={(e) => handleSubmit(e)}
+                        className="w-full py-3 rounded-lg  bg-gradient-to-br from-green-500 to-teal-500 hover:bg-green-600 text-white font-semibold text-lg flex justify-center items-center  focus:outline-none transition duration-300 ease-in-out"
+                    >
+                        {isLoading ? (
+                            <FaSpinner className="animate-spin text-xl text-white" />
+                        ) : (
+                            "Search"
+                        )}
                     </button>
                 </div>
             </form>
+
+
         </>
     );
 };

@@ -4,10 +4,10 @@ import NavBar from '@/components/navbar/nav'
 import Footer from '@/components/navbar/footer'
 
 export const metadata: Metadata = {
-    title: "ForestBot - Home",
-    description: "ForestBot the minecraft bot",
-    keywords: "SimplyVanilla, ForestBot, Forest, Bot, Simly, Vanilla, Minecraft,",
-    applicationName: "ForestBot",
+  title: "ForestBot",
+  description: "Your Server's Silent Observer.",
+  icons: "/forestbot_new_no_text.png",
+  keywords: ["Minecraft", "Discord", "Server", "ForestBot", "Bot", "Forest", "Febzey", "Simplyvanilla", "Barevanilla", "MinecraftServerList", "Mc"],
 }
 
 export default function RootLayout({

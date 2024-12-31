@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/types/app/page.tsx", ".next/types/app/layout.tsx", ".next/types/app/[user]/page.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/types/app/page.tsx", ".next/types/app/layout.tsx", ".next/types/app/[user]/page.tsx", "src/app/fbStatsSection.txs"],
   "exclude": ["node_modules"]
 }

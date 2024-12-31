@@ -6,11 +6,18 @@ export default function FeaturesPage() {
 
 
     return (
-        <div className="min-h-screen h-auto w-full  lg:w-[60%] lg:pt-[10%] pt-[30%] pb-[20%] mx-auto">
-            <div className="flex flex-col w-full  text-center text-lg text-neutral-300 ">
+        <div className="min-h-screen w-full lg:w-[60%] pb-[20%] mx-auto p-2">
+            <div className="flex flex-col w-full  text-center text-lg text-neutral-300 lg:pt-[15%] lg:mt-0 mt-[45%]">
 
                 <h1 className="text-7xl font-Protest text-neutral-100">Features<span className="text-emerald-400">.</span></h1>
                 <p className="text-neutral-200">Here are some of the features that the bot has to offer<span className="text-emerald-400">.</span></p>
+
+                <Link
+                    href="/commands"
+                    className="px-8 py-4 lg:w-[40%] mx-auto mt-3 border-emerald-500 border-[1px] font-Protest text-md text-white bg-emerald-500 hover:bg-emerald-600 shadow-md rounded-lg flex items-center justify-center gap-3 transition-all duration-200"
+                >
+                    Commands <FaRobot />
+                </Link>
             </div>
 
             <div className="z-50 my-16 h-[1px] border-t-0 bg-transparent mx-auto w-full bg-gradient-to-r from-transparent via-white to-transparent opacity-25"></div>

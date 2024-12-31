@@ -5,10 +5,13 @@ import UserProfileCard from "./profileCard"
 import { api } from "../../../apiGetter"
 
 
+/**
+ * Getting every server the user has played on and their stats
+ * @param username 
+ * @returns 
+ */
 async function getUser(username: string) {
   try {
-
-    //change this in the golang api to convert the username to UUID based.
     const uuid = await api.convertUsernameToUuid(username);
     if (!uuid) return null;
 
@@ -19,6 +22,11 @@ async function getUser(username: string) {
   }
 }
 
+/**
+ * Render the user page
+ * @param param
+ * @returns 
+ */
 export default async function Page({
   params,
   searchParams
@@ -59,7 +67,7 @@ async function UserPageBuilder({ username, server }: { username: string, server?
     if (!data) return notFound();
     if (server) {
       const stat = data.find((entry) => entry.mc_server === server);
-      console.log(stat," stat")
+      console.log(stat, " stat")
       if (!stat) return notFound();
       return stat;
     } else {

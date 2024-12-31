@@ -32,7 +32,7 @@ const Graph = ({ aggregatedData }: { aggregatedData: { day: string, playtime: nu
     //@ts-ignore
     if (!aggregatedData || aggregatedData.length === 0 || aggregatedData === undefined || aggregatedData === null) { 
         return (
-            <div className='mt-10 w-full h-fit my-auto flex justify-center items-center'>
+            <div className='mt-10 w-full h-full flex justify-center items-center'>
                 <p className='text-center text-gray-500 italic'>No data available. Time to play and gather some stats!</p>
             </div>
         )
@@ -64,6 +64,7 @@ const Graph = ({ aggregatedData }: { aggregatedData: { day: string, playtime: nu
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 title: {
@@ -85,8 +86,8 @@ const Graph = ({ aggregatedData }: { aggregatedData: { day: string, playtime: nu
     };
 
     return (
-        <div className='border mt-10 border-gray-400 pt-0 rounded-xl w-full h-fit my-auto shadow-xl'>
-            <Line data={chartData} options={options} />
+        <div className='border mt-10 border-gray-400 pt-0 rounded-xl w-full h-full my-auto shadow-xl'>
+            <Line data={chartData} options={options} className="w-full h-full" />
         </div>
     );
     }
