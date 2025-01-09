@@ -67,7 +67,6 @@ async function UserPageBuilder({ username, server }: { username: string, server?
     if (!data) return notFound();
     if (server) {
       const stat = data.find((entry) => entry.mc_server === server);
-      console.log(stat, " stat")
       if (!stat) return notFound();
       return stat;
     } else {

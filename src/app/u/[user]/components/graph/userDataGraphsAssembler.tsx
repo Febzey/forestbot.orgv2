@@ -2,35 +2,43 @@ import { FaCube } from "react-icons/fa";
 import Graph from "./activity_graph";
 import { api } from "../../../../../apiGetter";
 
-async function getGraphData(username: string, server: string) {
-    const uuid = await api.convertUsernameToUuid(username);
+interface PlaytimeData {
+    day: string;
+    playtime: number;
+}
 
+async function getGraphData(uuid: string, server: string): Promise<PlaytimeData[] | null> {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/player/playtime?uuid=${uuid}&date=${Date.now()}&server=${server}&duration=1_week`, { cache: 'no-cache' });
-        const data = await res.json();;
-        if (data["success"] === false) { 
+        const data = await res.json();
+        if (data["success"] === false || data.error) { 
             return null;
         } 
 
         return data;
     } catch (err) {
+        console.error("Error fetching graph data:", err);
         return null;
     }
 }
 
-export default async function UserDataGraphs({ username, server }: { username: string, server: string }) {
-    const data = await getGraphData(username, server) as any[];
-    if (!data || data.length === 0 || data === undefined || data === null) {
+interface UserDataGraphsProps {
+    username: string;
+    server: string;
+    uuid: string
+}
+
+export default async function UserDataGraphs({ username, server, uuid }: UserDataGraphsProps) {
+    const data: PlaytimeData[] | null = await getGraphData(uuid, server);
+    if (!data || data.length === 0) {
         return (
             <div className="bg-zinc-700/60 rounded rounded-lnone flex w-full p-4">
                 <div className="w-full h-full bg-zinc-800 rounded rounded-r-none p-8 shadow-2xl">
                     <h3 className="text-lg text-center text-white font-Protest">No Data For The Last Week</h3>
                 </div>
             </div>
-        )
+        );
     }
-
-    console.log(data, "data")
 
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const totalPlaytimeMinutes = data.reduce((sum, entry) => sum + entry.playtime, 0);
@@ -75,7 +83,6 @@ export default async function UserDataGraphs({ username, server }: { username: s
     const weekendWeekdayString = `Played ${weekendPlaytime.toFixed(1)} hours on the weekend and ${weekdayPlaytime.toFixed(1)} hours on weekdays.`;
     const streakString = `Longest streak was ${maxStreak} consecutive play days.`;
 
-
     return (
         <div className="w-full h-full bg-zinc-800 rounded rounded-r-none p-8 shadow-2xl">
             <h1 className="text-2xl font-Protest">Weekly Report</h1>
@@ -112,11 +119,10 @@ export default async function UserDataGraphs({ username, server }: { username: s
                         </div>
                         <p className="text-sm">{streakString}</p>
                     </li>
-
                 </ul>
 
                 <Graph aggregatedData={data} />
             </div>
         </div>
-    )
+    );
 }

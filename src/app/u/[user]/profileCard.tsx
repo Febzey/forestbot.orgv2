@@ -68,7 +68,7 @@ export default function UserProfileCard({ userData, availableServers }: { userDa
 
                     <Suspense fallback={<GraphLoadingSkeleton />}>
                         <div className="bg-zinc-700/60 rounded rounded-l-none flex w-full p-4">
-                            <UserDataGraphs username={userData.username} server={userData.mc_server} />
+                            <UserDataGraphs username={userData.username} server={userData.mc_server} uuid={userData.uuid} />
                         </div>
                     </Suspense>
                 </div>
