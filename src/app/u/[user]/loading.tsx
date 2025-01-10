@@ -32,3 +32,49 @@ export function GraphLoadingSkeleton() {
         </div>
     )
 }
+
+
+export function UserProfileCardSkeleton() {
+    return (
+        <div className="w-full pb-[4vh] pt-[8vh] lg:mt-0 mt-[25%]">
+            <div className="gap-1 flex items-center flex-col relative mb-auto mt-[6%]">
+                <div className="bg-zinc-800 p-4 mb-5 rounded-full w-[100px] h-[100px] animate-pulse"></div>
+                <div className="h-8 w-1/2 bg-zinc-700 animate-pulse rounded-md"></div>
+                <div className="h-4 w-1/3 bg-zinc-700 animate-pulse rounded-md mt-2"></div>
+                <div className="h-10 w-1/3 bg-zinc-700 animate-pulse rounded-md mt-4"></div>
+                <div className="h-4 w-2/3 bg-zinc-700 animate-pulse rounded-md mt-2"></div>
+            </div>
+
+            <div className="w-full p-2 sm:p-4 md:p-8 flex flex-col items-center justify-center">
+                <div className="flex flex-col lg:flex-row lg:gap-0 gap-4 w-full mt-[3%] mb-auto m-2 sm:m-4 shadow-xl shadow-zinc-900 rounded">
+                    <div className="flex lg:w-1/3 lg:min-w-[33.333%] w-full bg-zinc-700 p-4 md:p-8 rounded rounded-r-none flex-col gap-4">
+                        <div className="h-4 w-2/3 bg-zinc-600 animate-pulse rounded-md mb-2"></div>
+                        <div className="h-4 w-1/2 bg-zinc-600 animate-pulse rounded-md mb-2"></div>
+                        <div className="h-4 w-3/4 bg-zinc-600 animate-pulse rounded-md mb-2"></div>
+                    </div>
+
+                    <div className="bg-zinc-700/60 rounded rounded-l-none flex w-full p-4">
+                        <div className="h-64 w-full bg-zinc-600 animate-pulse rounded-md"></div>
+                    </div>
+                </div>
+
+                <div className="w-full flex h-auto min-h-[100vh] m-2 sm:m-4 bg-zinc-700 rounded p-4 shadow-2xl">
+                    <PlayerHistorySkeleton />
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function PlayerHistorySkeleton() {
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
+            {[...Array(4)].map((_, i) => (
+                <div
+                    key={i}
+                    className="h-64 w-full bg-zinc-600 animate-pulse rounded-md"
+                ></div>
+            ))}
+        </div>
+    );
+}

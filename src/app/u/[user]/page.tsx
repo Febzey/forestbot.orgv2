@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import Loading from "./loading"
+import Loading, { UserProfileCardSkeleton } from "./loading"
 import { notFound } from "next/navigation"
 import UserProfileCard from "./profileCard"
 import { api } from "../../../apiGetter"
@@ -76,6 +76,8 @@ async function UserPageBuilder({ username, server }: { username: string, server?
   }
 
   return (
-    <UserProfileCard userData={serverPlayerData()} availableServers={data} />
+    <Suspense fallback={<UserProfileCardSkeleton/>}>
+      <UserProfileCard userData={serverPlayerData()} availableServers={data} />
+    </Suspense>
   )
 }
