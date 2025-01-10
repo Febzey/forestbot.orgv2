@@ -28,12 +28,14 @@ type PlayerActivityGraphProps = {
 };
 
 export default function PlayerActivityGraph({ data }: PlayerActivityGraphProps) {
+  // Remove the last day
+  data.pop();
+
   // Prepare the labels for each day
   const daysLabels = data.map(item => item.day);
-
+  
   // Convert playtime from minutes to hours
   const playtimeData = data.map(item => item.playtime / 60);
-
   // Define chart data
   const chartData = {
     labels: daysLabels,
