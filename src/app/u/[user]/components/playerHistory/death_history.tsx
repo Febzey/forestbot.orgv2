@@ -4,7 +4,7 @@ import { api } from "../../../../../apiGetter";
 
 export default async function PlayerDeathHistory({ uuid, server }: { uuid: string, server: string }) {
 
-    const deaths = await api.getDeaths(uuid, server, 100, "DESC", "all");
+    const deaths = await api.getDeaths(uuid, server, 500, "DESC", "all");
 
     if (!deaths || deaths.length === 0) {
         return (
@@ -20,7 +20,7 @@ export default async function PlayerDeathHistory({ uuid, server }: { uuid: strin
 
     return (
         <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
-            <h3 className="font-Protest text-3xl">Death History (100)</h3>
+            <h3 className="font-Protest text-3xl">Death History <span className="text-sm">(500)</span></h3>
             <ul className="bg-zinc-800 overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
                 {
                     deaths.map((obj, index) => {

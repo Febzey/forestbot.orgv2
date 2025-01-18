@@ -4,7 +4,7 @@ import { api } from "../../../../../apiGetter";
 
 export default async function PlayerKillHistory({ uuid, server }: { uuid: string, server: string }) {
 
-    const kills = await api.getKills(uuid, server, 100, "DESC");
+    const kills = await api.getKills(uuid, server, 500, "DESC");
 
     if (!kills || kills.length === 0) {
         return (
@@ -20,7 +20,7 @@ export default async function PlayerKillHistory({ uuid, server }: { uuid: string
 
     return (
         <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
-            <h3 className="font-Protest text-3xl">Kills History (100)</h3>
+            <h3 className="font-Protest text-3xl">Kills History <span className="text-sm">(500)</span></h3>
             <ul className="bg-zinc-800 overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
                 {
                     kills.map((obj, index) => {

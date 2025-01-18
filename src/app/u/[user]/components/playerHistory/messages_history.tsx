@@ -4,7 +4,7 @@ import { api } from "../../../../../apiGetter";
 
 export default async function MessageHistoryCard({ username, server }: { username: string, server: string }) {
 
-    const messages = await api.getMessages(username, server, 100, "DESC");
+    const messages = await api.getMessages(username, server, 500, "DESC");
     if (!messages || messages.length === 0) {
         return (
             <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
@@ -20,7 +20,7 @@ export default async function MessageHistoryCard({ username, server }: { usernam
 
     return (
         <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
-            <h3 className="font-Protest text-3xl">Message History (100)</h3>
+            <h3 className="font-Protest text-3xl">Message History <span className="text-sm">(500)</span></h3>
             <ul className="bg-zinc-800 overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
                 {
                     messages.map((message, index) => {

@@ -4,7 +4,7 @@ import { api } from "../../../../../apiGetter"
 
 export default async function AdvancementHistoryCard({ uuid, server }: { uuid: string, server: string }) {
 
-    const advancements = await api.getAdvancements(uuid, server, 100, "DESC");
+    const advancements = await api.getAdvancements(uuid, server, 500, "DESC");
     if (!advancements || advancements.length === 0) {
         return (
             <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
@@ -19,7 +19,7 @@ export default async function AdvancementHistoryCard({ uuid, server }: { uuid: s
 
     return (
         <div className="flex flex-col overflow-hidden gap-3 max-h-[80vh]">
-            <h3 className="font-Protest text-3xl">Advancement History (100)</h3>
+            <h3 className="font-Protest text-3xl">Advancement History <span className="text-sm">(500)</span></h3>
             <ul className="bg-zinc-800 overflow-y-scroll p-4 flex gap-2 flex-col rounded min-h-[80vh]">
                 {
                     advancements.map((obj, index) => {
