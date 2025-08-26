@@ -24,7 +24,7 @@ ChartJS.register(
 );
 
 type PlayerActivityGraphProps = {
-  data: { day: string; playtime: number }[];
+  data: { day:string, avgPlayerCount:number }[];
 };
 
 export default function PlayerActivityGraph({ data }: PlayerActivityGraphProps) {
@@ -35,13 +35,13 @@ export default function PlayerActivityGraph({ data }: PlayerActivityGraphProps) 
   const daysLabels = data.map(item => item.day);
   
   // Convert playtime from minutes to hours
-  const playtimeData = data.map(item => item.playtime / 60);
+  const playtimeData = data.map(item => item.avgPlayerCount);
   // Define chart data
   const chartData = {
     labels: daysLabels,
     datasets: [
       {
-        label: 'Playtime (hours)',
+        label: 'Player count',
         data: playtimeData,
         borderColor: '#10b981',
         backgroundColor: 'transparent',

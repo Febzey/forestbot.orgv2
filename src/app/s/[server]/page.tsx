@@ -9,9 +9,9 @@ import { notFound } from "next/navigation";
 
 async function getAllKnownMinecraftServers() {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/all-servers`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/all-servers`, { cache: 'no-cache' });
         if (!res.ok) return null;
-
+       // console.log(await res.json(), " all servers");
         const data = await res.json();
         return data;
     } catch (err) {
@@ -22,7 +22,12 @@ async function getAllKnownMinecraftServers() {
 
 export default async function ServerPage({ params }: { params: { server: string } }) {
     const allservers = await getAllKnownMinecraftServers();
-    if (!allservers || !allservers.includes(params.server)) return notFound()
+    console.log(allservers, " all servers1");
+    console.log(params.server, " param server");
+    if (!allservers || !allservers.includes(params.server)) {
+        console.log("not found");
+        return notFound()
+    }
 
     return <PageContentBuilder server={params.server} />
 }
@@ -36,10 +41,9 @@ function PageContentBuilder({ server }: { server: string }) {
                 <div className="flex items-center justify-center flex-col pt-5 gap-3 text-neutral-400">
                     <div className="text-center w-full text-neutral-400 italic flex items-center justify-center flex-col">
                         <p className="text-sm sm:text-base md:text-lg">
-                            Here is a graph of the accumulated playtime for the past month. <br></br>
-                            This will soon be a graph of the player count for the past month.
+                            Average Player Count Per Day
                         </p>
-                        <p className="flex items-center justify-center gap-1.5 pb-5 text-sm sm:text-base md:text-lg">
+                        <p className="flex text-xs items-center justify-center gap-1.5 pb-5">
                             Scroll down to see some leaderboards and other stats <FaChartLine />
                         </p>
                     </div>

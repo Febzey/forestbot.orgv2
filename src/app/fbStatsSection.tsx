@@ -1,7 +1,6 @@
 import { FaDotCircle, FaSpinner } from "react-icons/fa";
 
 async function getForestBotStats() {
-  //{"status":{"databaseIsConnected":true,"connectedServers":["simplyvanilla","barevanilla","eusurvival"],"memory":"20.69 MB","messages":11539832,"users":127264}}
   const res = await fetch('https://api.forestbot.org/status');
   if (!res.ok) {
       return null;

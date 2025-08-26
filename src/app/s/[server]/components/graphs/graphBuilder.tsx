@@ -7,8 +7,8 @@ import { FaSpinner } from "react-icons/fa";
 async function getServerGraphData(server: string) {
     try {
         const date = Date.now();
-        const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/server/playtime?date=${date}&server=${server}&duration=1_month`, { cache: 'no-cache' });
-        console.log(res);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_FORESTBOT_API_URL}/server/playercounts?date=${date}&server=${server}&duration=1_month`, { cache: 'no-cache' });
+        console.log(res, " results for graph data");
         if (!res.ok) return null;
 
         const d = await res.json();
